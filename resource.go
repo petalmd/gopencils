@@ -238,14 +238,6 @@ func (r *Resource) do(method string) (*Resource, error) {
 
 	r.Raw = resp
 
-	if resp.StatusCode >= 400 {
-		return r, nil
-	}
-
-	for k, _ := range r.Raw.Header {
-		r.SetHeader(k, r.Raw.Header.Get(k))
-	}
-
 	defer resp.Body.Close()
 
 	if r.Logger != nil {
@@ -255,6 +247,14 @@ func (r *Resource) do(method string) (*Resource, error) {
 		} else {
 			r.Logger.Printf("%s", string(dump))
 		}
+	}
+
+	if resp.StatusCode >= 400 {
+		return r, nil
+	}
+
+	for k, _ := range r.Raw.Header {
+		r.SetHeader(k, r.Raw.Header.Get(k))
 	}
 
 	err = json.NewDecoder(resp.Body).Decode(r.Response)
