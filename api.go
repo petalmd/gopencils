@@ -15,7 +15,6 @@
 package gopencils
 
 import (
-	"crypto/tls"
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
@@ -62,14 +61,8 @@ func Api(baseUrl string, options ...interface{}) *Resource {
 	if apiInstance.Client == nil {
 		apiInstance.Cookies, _ = cookiejar.New(nil)
 
-		// Skip verify by default?
-		tr := &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-		}
-
 		client := &http.Client{
-			Transport: tr,
-			Jar:       apiInstance.Cookies,
+			Jar: apiInstance.Cookies,
 		}
 		apiInstance.Client = client
 	}
