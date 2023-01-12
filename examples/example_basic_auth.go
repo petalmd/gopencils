@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/bndr/gopencils"
+	"github.com/kovetskiy/gopencils"
 )
 
 func main() {
