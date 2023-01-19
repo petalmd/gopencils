@@ -2,7 +2,7 @@ package main
 
 import (
 	"golang.org/x/oauth2"
-	"github.com/bndr/gopencils"
+	"github.com/kovetskiy/gopencils"
 	"net/http"
 )
 
